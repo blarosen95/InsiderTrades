@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,6 +24,9 @@ namespace InsiderTrades
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        internal HomePage HomeView = new HomePage();
+        internal ListPage ListView = new ListPage();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -63,11 +67,11 @@ namespace InsiderTrades
                     switch (ItemContent.Tag)
                     {
                         case "Nav_Home":
-                            contentFrame.Navigate(typeof(HomePage));
+                            contentFrame.Content = HomeView;
                             break;
 
                         case "Nav_List":
-                            contentFrame.Navigate(typeof(ListPage));
+                            contentFrame.Content = ListView;
                             break;
                     }
                 }

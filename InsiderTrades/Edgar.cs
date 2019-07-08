@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using HtmlAgilityPack;
@@ -41,14 +42,15 @@ namespace InsiderTrades
             }
         }
 
-        public async void GetInfo(string ticker)
+        public async Task<List<string>> GetInfo(string ticker)
         {
             var cik = await GetCIKNumberAsync(ticker);
             var urls = $"https://www.sec.gov/cgi-bin/own-disp?action=getissuer&CIK={cik}";
-            
+
             HtmlWeb web = new HtmlWeb();
             HttpClient client = new HttpClient();
 
+            List<String> cells = new List<string>();
             using (var response = await client.GetAsync(@urls))
             {
                 using (var content = response.Content)
@@ -65,12 +67,14 @@ namespace InsiderTrades
                         foreach (HtmlNode cell in row.SelectNodes("th|td"))
                         {
                             Console.WriteLine("cell: " + cell.InnerText);
+
+                            cells.Add(cell.InnerText);
                         }
                     }
                 }
             }
 
+            return cells;
         }
-
     }
 }

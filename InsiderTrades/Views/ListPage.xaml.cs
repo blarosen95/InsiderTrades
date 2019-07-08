@@ -30,8 +30,7 @@ namespace InsiderTrades.Views
             this.InitializeComponent();
         }
 
-        Transaction Transaction { get; set; }
-
+        private HomePage HomePage { get; set; }
 
     }
 }

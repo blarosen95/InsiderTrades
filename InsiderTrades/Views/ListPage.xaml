@@ -12,7 +12,7 @@
     <Grid>
         <TextBlock>List</TextBlock>
 
-        <controls:DataGrid x:Name="dataGrid" Height="600" Margin="12" AutoGenerateColumns="True" ItemsSource="{x:Bind transactions}">
+        <controls:DataGrid x:Name="dataGrid" Height="600" Margin="12" AutoGenerateColumns="True" ItemsSource="{x:Bind HomePage.Cells}">
 
         </controls:DataGrid>
 
