@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -22,6 +23,10 @@ namespace InsiderTrades.Views
         {
             Edgar edgar = new Edgar();
             Cells = await edgar.GetInfo(TickerBox.Text);
+            var subCells = Cells.ChunkBy(12);
+            var messageDialog = new MessageDialog(subCells.Count.ToString());
+
+            await messageDialog.ShowAsync();
         }
     }
 }
