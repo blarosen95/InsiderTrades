@@ -37,6 +37,12 @@ namespace InsiderTrades.ViewModel
             SecName = secName;
         }
 
+        public override string ToString()
+        {
+            return
+                $"{AcqOrDis}, {TransactionDate}, {DeemedDate}, {Owner}, {Form}, {TransType}, {TypeOfOwner}, {NumTransacted}, {NumOwned}, {LineNum}, {OwnerCIK}, {SecName}";
+        }
+
         /*
         public static List<Transaction> Transactions()
         {
