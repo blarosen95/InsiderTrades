@@ -31,7 +31,8 @@ namespace InsiderTrades
                 break;
             }
 
-            ContentFrame.Navigate(typeof(HomePage));
+            //ContentFrame.Navigate(typeof(HomePage));
+            ContentFrame.Content = HomeView;
         }
 
         private void NvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
