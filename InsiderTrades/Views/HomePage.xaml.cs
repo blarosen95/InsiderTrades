@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using InsiderTrades.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -14,10 +10,9 @@ namespace InsiderTrades.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HomePage : Page
+    public sealed partial class HomePage
     {
-        public List<String> Cells = new List<string>();
-        public List<Transaction> Transactions = new List<Transaction>();
+        public List<string> Cells = new List<string>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,7 +20,7 @@ namespace InsiderTrades.Views
 
         public HomePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)

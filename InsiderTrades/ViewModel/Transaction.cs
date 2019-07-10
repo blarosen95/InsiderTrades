@@ -1,36 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace InsiderTrades.ViewModel
 {
     public class TransactionList : ObservableCollection<Transaction>
     {
-        public TransactionList() : base()
-        {
-
-        }
     }
 
     public class Transaction
     {
-        public String AcqOrDis {get; set;}
-        public String TransactionDate { get; set; }
-        public String DeemedDate { get; set; }
-        public String Owner { get; set; }
-        public String Form { get; set; }
-        public String TransType { get; set; }
-        public String TypeOfOwner { get; set; }
-        public String NumTransacted { get; set; }
-        public String NumOwned { get; set; }
-        public String LineNum { get; set; }
-        public String OwnerCIK { get; set; }
-        public String SecName { get; set; }
+        public string AcqOrDis { get; set; }
+        public string TransactionDate { get; set; }
+        public string DeemedDate { get; set; }
+        public string Owner { get; set; }
+        public string Form { get; set; }
+        public string TransType { get; set; }
+        public string TypeOfOwner { get; set; }
+        public string NumTransacted { get; set; }
+        public string NumOwned { get; set; }
+        public string LineNum { get; set; }
+        public string OwnerCIK { get; set; }
+        public string SecName { get; set; }
 
-        public Transaction(string acqOrDis, string transactionDate, string deemedDate, string owner, string form, string transType, string typeOfOwner, string numTransacted, string numOwned, string lineNum, string ownerCIK, string secName)
+        public Transaction(string acqOrDis, string transactionDate, string deemedDate, string owner, string form,
+            string transType, string typeOfOwner, string numTransacted, string numOwned, string lineNum,
+            string ownerCIK, string secName)
         {
             AcqOrDis = acqOrDis;
             TransactionDate = transactionDate;
@@ -51,18 +44,5 @@ namespace InsiderTrades.ViewModel
             return
                 $"{AcqOrDis}, {TransactionDate}, {DeemedDate}, {Owner}, {Form}, {TransType}, {TypeOfOwner}, {NumTransacted}, {NumOwned}, {LineNum}, {OwnerCIK}, {SecName}";
         }
-
-        /*
-        public static List<Transaction> Transactions()
-        {
-            return new List<Transaction>(new Transaction[3]
-                {
-                    new Transaction("Davis Stephanie A", "0001771886", "2019-06-26", "director"),
-                    new Transaction("EDELMAN JOSEPH", "0001164426", "2019-06-18", "10 percent owner"),
-                    new Transaction("PERCEPTIVE ADVISORS LLC", "0001224962", "2019-06-18", "10 percent owner")
-                }
-            );
-        }
-        */
     }
 }
