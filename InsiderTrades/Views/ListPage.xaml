@@ -12,8 +12,69 @@
     <Grid>
         <TextBlock>List</TextBlock>
 
-        <controls:DataGrid x:Name="dataGrid" Height="600" Margin="12" AutoGenerateColumns="True" ItemsSource="{x:Bind HomePage.Cells}">
-
+        <controls:DataGrid x:Name="dataGrid" Height="600" Margin="12" AutoGenerateColumns="False" ItemsSource="{x:Bind HomePage.TransactionList, Mode=OneWay}">
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn
+                    Header="Acquisition or Disposition"
+                    Width="SizeToHeader"
+                    Binding="{Binding AcqOrDis}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Transaction Date"
+                    Width="SizeToHeader"
+                    Binding="{Binding TransactionDate}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Deemed Execution Date"
+                    Width="SizeToHeader"
+                    Binding="{Binding DeemedDate}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Reporting Owner"
+                    Width="SizeToHeader"
+                    Binding="{Binding Owner}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Form"
+                    Width="SizeToHeader"
+                    Binding="{Binding Form}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Transaction Type"
+                    Width="SizeToHeader"
+                    Binding="{Binding TransType}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Direct or Indirect Ownership"
+                    Width="SizeToHeader"
+                    Binding="{Binding TypeOfOwner}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Number of Securities Transacted"
+                    Width="SizeToHeader"
+                    Binding="{Binding NumTransacted}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Number of Securities Owned"
+                    Width="SizeToHeader"
+                    Binding="{Binding NumOwned}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Line Number"
+                    Width="SizeToHeader"
+                    Binding="{Binding LineNum}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Owner CIK"
+                    Width="SizeToHeader"
+                    Binding="{Binding OwnerCIK}"
+                    FontSize="20" />
+                <controls:DataGridTextColumn
+                    Header="Security Name"
+                    Width="SizeToHeader"
+                    Binding="{Binding SecName}"
+                    FontSize="20" />
+            </controls:DataGrid.Columns>
         </controls:DataGrid>
 
     </Grid>

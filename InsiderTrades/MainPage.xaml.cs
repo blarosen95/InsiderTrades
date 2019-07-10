@@ -25,11 +25,12 @@ namespace InsiderTrades
     public sealed partial class MainPage : Page
     {
         internal HomePage HomeView = new HomePage();
-        internal ListPage ListView = new ListPage();
+        internal ListPage ListView;// = new ListPage(this.HomeView);
 
         public MainPage()
         {
             this.InitializeComponent();
+            this.ListView = new ListPage(HomeView);
         }
 
         #region NavigationView event handlers

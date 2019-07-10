@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InsiderTrades.ViewModel
 {
-    class Transaction
+    public class TransactionList : ObservableCollection<Transaction>
+    {
+        public TransactionList() : base()
+        {
+
+        }
+    }
+
+    public class Transaction
     {
         public String AcqOrDis {get; set;}
         public String TransactionDate { get; set; }
