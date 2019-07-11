@@ -8,10 +8,41 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style x:Key="CellStyle" TargetType="controls:DataGridCell">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls:DataGridCell">
+                        <Border Background="Black" BorderThickness="0">
+                            <Border x:Name="border"
+                                    BorderBrush="Brown"
+                                    BorderThickness="2"
+                                    Background="White"
+                                    CornerRadius="5">
+                                <ContentPresenter />
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RowStyle" TargetType="controls:DataGridRow">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="CornflowerBlue"/>
+        </Style>
+
+    </Page.Resources>
+
     <Grid>
         <TextBlock>List</TextBlock>
 
-        <controls:DataGrid Height="600" Margin="12" AutoGenerateColumns="False" ItemsSource="{x:Bind HomePage.TransactionList, Mode=OneWay}">
+        <controls:DataGrid Height="600" Margin="12" AutoGenerateColumns="False" ItemsSource="{x:Bind HomePage.TransactionList, Mode=OneWay}" >
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn
                     Header="Acquisition or Disposition"
