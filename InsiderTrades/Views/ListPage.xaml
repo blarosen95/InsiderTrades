@@ -42,7 +42,7 @@
     <Grid>
         <TextBlock>List</TextBlock>
 
-        <controls:DataGrid Height="600" Margin="12" AutoGenerateColumns="False" ItemsSource="{x:Bind HomePage.TransactionList, Mode=OneWay}" RowStyle="{StaticResource RowStyle}">
+        <controls:DataGrid Height="600" Margin="12" AutoGenerateColumns="False" ItemsSource="{x:Bind HomePage.TransactionList, Mode=OneWay}" >
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn
                     Header="Acquisition or Disposition"
