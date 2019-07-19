@@ -1,13 +1,15 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
 
 namespace InsiderTrades.ViewModel
 {
-    public class TransactionList : ObservableCollection<Transaction>
+    public class TransactionList : ConcurrentStack<Transaction>
     {
     }
 
     public class Transaction
     {
+        public int SortingKey { get; set; }
         public string AcqOrDis { get; set; }
         public string TransactionDate { get; set; }
         public string DeemedDate { get; set; }
@@ -23,7 +25,7 @@ namespace InsiderTrades.ViewModel
 
         public Transaction(string acqOrDis, string transactionDate, string deemedDate, string owner, string form,
             string transType, string typeOfOwner, string numTransacted, string numOwned, string lineNum,
-            string ownerCIK, string secName)
+            string ownerCIK, string secName, int sortingKey)
         {
             AcqOrDis = acqOrDis;
             TransactionDate = transactionDate;
@@ -37,6 +39,7 @@ namespace InsiderTrades.ViewModel
             LineNum = lineNum;
             OwnerCIK = ownerCIK;
             SecName = secName;
+            SortingKey = sortingKey;
         }
 
         public override string ToString()

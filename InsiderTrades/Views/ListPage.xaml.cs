@@ -15,5 +15,11 @@ namespace InsiderTrades.Views
         }
 
         private HomePage HomePage { get; set; }
+
+        public void UpdateBindings()
+        {
+            Bindings.Update();
+            //Testing placement for initial sorting
+        }
     }
 }

@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using InsiderTrades.ViewModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace InsiderTrades.Views
 {
@@ -15,9 +21,18 @@ namespace InsiderTrades.Views
 
         public TransactionList TransactionList = new TransactionList();
 
-        public HomePage()
+        private MainPage _mainPage;
+
+        private Queue<List<List<string>>> myQueue;
+
+        public ObservableCollection<Transaction> oc;
+
+        Object lockMe = new Object();
+
+        public HomePage(MainPage mainPage)
         {
             InitializeComponent();
+            _mainPage = mainPage;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -30,17 +45,25 @@ namespace InsiderTrades.Views
                 Cells = await edgar.GetInfo(TickerBox.Text);
                 var subCells = Cells.ChunkBy(12);
 
+                ParallelOptions options = new ParallelOptions {MaxDegreeOfParallelism = 3};
                 //Skip the first item in the list (it should just be the tables column names).
-                for (var i = 1; i < subCells.Count; i++)
-                {
-                    Transaction transaction = new Transaction(subCells[i][0], subCells[i][1], subCells[i][2],
-                        subCells[i][3], subCells[i][4], subCells[i][5], subCells[i][6], subCells[i][7], subCells[i][8],
-                        subCells[i][9], subCells[i][10], subCells[i][11]);
+                //for (var i = 1; i < subCells.Count; i++)
+                Parallel.For(1, subCells.Count, options, i =>
+                    {
+                        var transaction = new Transaction(subCells[i][0], subCells[i][1], subCells[i][2],
+                            subCells[i][3], subCells[i][4], subCells[i][5], subCells[i][6], subCells[i][7],
+                            subCells[i][8],
+                            subCells[i][9], subCells[i][10], subCells[i][11], i);
 
-                    TransactionList.Add(transaction);
-                }
-
+                        TransactionList.Push(transaction);
+                        //TransactionStack.Add(transaction);
+                    });
+                oc = new ObservableCollection<Transaction>(TransactionList.AsParallel().OrderBy(transaction => transaction.SortingKey ));
                 OnPropertyChanged("Transactions");
+
+                //Switch to ListPage if ready
+                _mainPage.ListView.UpdateBindings();
+                _mainPage.GoToListView();
             }
             catch (System.Net.Http.HttpRequestException err)
             {
@@ -55,5 +78,6 @@ namespace InsiderTrades.Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
     }
 }
