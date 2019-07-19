@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
@@ -25,11 +26,15 @@ namespace InsiderTrades
                     var document = new HtmlDocument();
 
                     document.LoadHtml(result);
-                    var node = document.DocumentNode.SelectSingleNode("(//span)[8]");
-                    var nodeInner = node.InnerText;
+                    
+                    //var node = document.DocumentNode.SelectSingleNode("(//span)[8]");
+                    //var nodeInner = node.InnerText;
 
-                    var pattern = @"(\d{10})";
-                    Match match = Regex.Match(nodeInner, pattern);
+                    //var pattern = @"(\d{10})";
+                    //Match match = Regex.Match(nodeInner, pattern);
+
+                    var pattern = @"((?<=CIK=)\d{10})";
+                    Match match = Regex.Match(document.Text, pattern);
 
                     return match.Success ? match.Value : "Error on matching for a CIK number!";
                 }
@@ -66,18 +71,7 @@ namespace InsiderTrades
                     //Note that there is still perceivable latency in the sense that the user can click the ListPage's icon and navigate to it before the list loads. 
                     //This might be lessened further if the GetCIKNumberAsync method is optimized now
                     var tableNodes = document.DocumentNode.SelectSingleNode("(//table)[8]");
-                    //TODO: remove these sorts of WriteLines after performing profiling against proper internet
-                    Console.WriteLine(tableNodes.InnerHtml);
-                    foreach (var row in tableNodes.SelectNodes("tr"))
-                    {
-                        Console.WriteLine("row"); //TODO delete line
-                        foreach (var cell in row.SelectNodes("th|td"))
-                        {
-                            Console.WriteLine("cell: " + cell.InnerText); //TODO delete line
-
-                            cells.Add(cell.InnerText);
-                        }
-                    }
+                    cells.AddRange(from row in tableNodes.SelectNodes("tr") from cell in row.SelectNodes("th|td") select cell.InnerText);
                 }
             }
 

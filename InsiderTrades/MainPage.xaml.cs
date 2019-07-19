@@ -11,12 +11,13 @@ namespace InsiderTrades
     /// </summary>
     public sealed partial class MainPage
     {
-        internal HomePage HomeView = new HomePage();
+        internal HomePage HomeView;// = new HomePage();
         internal ListPage ListView;// = new ListPage(this.HomeView);
 
         public MainPage()
         {
             InitializeComponent();
+            HomeView = new HomePage(this);
             ListView = new ListPage(HomeView);
         }
 
@@ -40,7 +41,7 @@ namespace InsiderTrades
             //Intentionally left blank
         }
 
-        private void NvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        internal void NvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)
             {
@@ -64,6 +65,10 @@ namespace InsiderTrades
 
         #endregion
 
+        internal void GoToListView()
+        {
+            ContentFrame.Content = ListView;
+        }
         
     }
 }
